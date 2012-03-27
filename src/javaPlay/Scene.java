@@ -130,15 +130,15 @@ public class Scene
     public void draw(Graphics g)
     {
         //first clear the scene
-        GameCanvas canvas = GameEngine.getInstance().getGameCanvas();
+       // GameCanvas canvas = GameEngine.getInstance().getGameCanvas();
 
         g.setColor(Color.BLACK);
 
        // g.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         //first draw the backdrop
-        int startDrawX = canvas.getRenderScreenStartX() - drawStartX;
-        int startDrawY = canvas.getRenderScreenStartY() - drawStartY;
+        int startDrawX = drawStartX;
+        int startDrawY = drawStartY;
 
         g.drawImage(backDrop, startDrawX, startDrawY, null);
 
@@ -181,14 +181,13 @@ public class Scene
         }
     }
 
-    public Vector getTilesFromRect(Point min, Point max)
+    public ArrayList<TileInfo> getTilesFromRect(Point min, Point max)
     {
-        Vector v = new Vector();
+        ArrayList<TileInfo> v = new ArrayList<TileInfo>();
 
-        GameCanvas canvas = GameEngine.getInstance().getGameCanvas();
-        
-        int startDrawX = canvas.getRenderScreenStartX() - drawStartX;
-        int startDrawY = canvas.getRenderScreenStartY() - drawStartY;
+       
+        int startDrawX = drawStartX;
+        int startDrawY =  drawStartY;
         
         int tileWidth = tiles[0].getWidth(null);
         int tileHeight = tiles[0].getHeight(null);
@@ -207,17 +206,15 @@ public class Scene
                 TileInfo tile = new TileInfo();
 
                 tile.id = (Integer)tileLine.get(c);
-                tile.min.x = drawX - canvas.getRenderScreenStartX();
-                tile.min.y = drawY - canvas.getRenderScreenStartY();
-                tile.max.x = drawX - canvas.getRenderScreenStartX() + tileWidth - 1;
-                tile.max.y = drawY - canvas.getRenderScreenStartY() + tileHeight - 1;
+                tile.min.x = drawX ;
+                tile.min.y = drawY ;
+                tile.max.x = drawX + tileWidth-1;
+                tile.max.y = drawY + tileHeight-1;
 
-                if((min.x > tile.max.x) || (max.x < tile.min.x))
-                {
+                if((min.x > tile.max.x) || (max.x < tile.min.x))  {
                     continue;
                 }
-                if((min.y > tile.max.y) || (max.y < tile.min.y))
-                {
+                if((min.y > tile.max.y) || (max.y < tile.min.y)) {
                     continue;
                 }
                 

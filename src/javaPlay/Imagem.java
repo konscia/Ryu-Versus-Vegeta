@@ -1,4 +1,4 @@
-package ryuversusvegeta_final;
+package javaPlay;
 
 import java.awt.Graphics;
 import java.awt.Image;

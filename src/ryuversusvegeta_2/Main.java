@@ -1,21 +1,21 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+package ryuversusvegeta_2;
 
-package ryuversusvegeta;
+import javaPlay.GameEngine;
 
-/**
- *
- * @author KALEU
- */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+  public static void main(String[] args) {
+    
+    GameEngine.getInstance().addGameStateController(1, new Fase1());
+    GameEngine.getInstance().addGameStateController(2, new Fase2());
+    
+    GameEngine.getInstance().setStartingGameStateController(1);
 
+    //Executa um som ".wav". MP3 não funciona
+    //AudioPlayer.play( "sounds/comeon.wav" );
+    
+    GameEngine.getInstance().setFramesPerSecond(30);
+    GameEngine.getInstance().run();
+    
+  }
 }

@@ -1,15 +1,15 @@
 package ryuversusvegeta_final;
 
+import javaPlay.Keys;
+import javaPlay.Imagem;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javaPlay.GameEngine;
 import javaPlay.GameObject;
 import javaPlay.Keyboard;
 import javaPlay.Sprite;
+import javaPlayExtras.ObjetoComGravidade;
 import javax.swing.JOptionPane;
 
 public class Ryu extends ObjetoComGravidade {
@@ -56,7 +56,7 @@ public class Ryu extends ObjetoComGravidade {
 
         //Essencial par o objetoComGravidade poder trabalhar
         this.setAltura( this.imgAtual.pegaAltura() );
-        this.posicionaNoChao();
+        this.setLargura( this.imgAtual.pegaLargura() );
     }
 
     public void step(long timeElapsed) {
@@ -95,18 +95,13 @@ public class Ryu extends ObjetoComGravidade {
     public void alteraImagem(Imagem novaImagem){
         this.imgAtual = novaImagem;
         this.setAltura( this.imgAtual.pegaAltura() );
-
-        if(!this.estaPulando()){
-            this.posicionaNoChao();
-        }
+        this.setLargura( this.imgAtual.pegaLargura() );
     }
 
     public void normal() {
         
         if(this.estado == EstadoPersonagem.APANHANDO ){
             this.alteraImagem( this.imgApanhando );
-        } else if (this.estaPulando()) {
-            this.alteraImagem( this.imgPulo );
         } else {
             this.estado = EstadoPersonagem.NORMAL;
             this.alteraImagem( this.imgNormal );
@@ -114,7 +109,7 @@ public class Ryu extends ObjetoComGravidade {
     }
 
     public void pula() {        
-        if(this.estaPulando()){
+        if(this.estaSubindo() || this.estaDescendo()){
             return;
         }
 
@@ -148,7 +143,7 @@ public class Ryu extends ObjetoComGravidade {
             return;
         }
         this.vida -= 10;
-        this.x += 30;
+        this.x += 15;
         this.estado = EstadoPersonagem.APANHANDO;
         this.alteraImagem(this.imgApanhando);
         this.contadorApanhando = 0;               
@@ -162,11 +157,6 @@ public class Ryu extends ObjetoComGravidade {
         return (this.vida <= 0);
     }
 
-
-
-    public Rectangle getRectangle() {
-        return new Rectangle(this.x, this.y, this.imgAtual.pegaLargura(), this.imgAtual.pegaAltura());
-    }
 
     public void draw(Graphics g) {
         g.setColor(Color.white);

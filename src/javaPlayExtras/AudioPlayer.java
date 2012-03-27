@@ -1,4 +1,4 @@
-package ryuversusvegeta_final;
+package javaPlayExtras;
 
 import java.io.File;
 import javax.sound.sampled.AudioFormat;

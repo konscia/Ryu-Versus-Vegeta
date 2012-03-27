@@ -1,4 +1,4 @@
-package ryuversusvegeta_final;
+package javaPlay;
 
 import java.awt.event.KeyEvent;
 public class Keys

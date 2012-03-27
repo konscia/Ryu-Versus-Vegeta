@@ -1,15 +1,13 @@
 package ryuversusvegeta_final;
 
+import javaPlay.Keys;
+import javaPlay.Imagem;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javaPlay.GameEngine;
-import javaPlay.GameObject;
 import javaPlay.Keyboard;
-import javaPlay.Sprite;
+import javaPlayExtras.ObjetoComGravidade;
 import javax.swing.JOptionPane;
 
 public class Vegeta extends ObjetoComGravidade {
@@ -52,7 +50,7 @@ public class Vegeta extends ObjetoComGravidade {
 
         //Essencial par o objetoComGravidade poder trabalhar
         this.setAltura( this.imgAtual.pegaAltura() );
-        this.posicionaNoChao();
+        this.setLargura( this.imgAtual.pegaLargura() );
     }
 
     public void step(long timeElapsed) {
@@ -80,26 +78,21 @@ public class Vegeta extends ObjetoComGravidade {
     public void alteraImagem(Imagem novaImagem){
         this.imgAtual = novaImagem;
         this.setAltura( this.imgAtual.pegaAltura() );
-
-        if(!this.estaPulando()){
-            this.posicionaNoChao();
-        }
+        this.setLargura( this.imgAtual.pegaLargura() );
     }
 
     public void normal() {
         
         if(this.estado == EstadoPersonagem.APANHANDO ){
             this.alteraImagem( this.imgApanhando );
-        } else if (this.estaPulando()) {
-            this.alteraImagem( this.imgPulo );
-        } else {
+        }else {
             this.estado = EstadoPersonagem.NORMAL;
             this.alteraImagem( this.imgNormal );
         }
     }
 
     public void pula() {        
-        if(this.estaPulando()){
+        if(this.estaSubindo() || this.estaDescendo()){
             return;
         }
 

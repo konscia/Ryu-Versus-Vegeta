@@ -13,7 +13,9 @@ public class Fase1 implements GameStateController{
 
   public void load() {
      try {
+         
         this.cenario = new CenarioComColisao("resources/cenario1.scn");
+        
     } catch (FileNotFoundException ex) {
         JOptionPane.showMessageDialog(null, ex.getMessage());
     }

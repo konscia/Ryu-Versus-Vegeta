@@ -20,6 +20,7 @@ public class Fase1 implements GameStateController{
      try {
         this.cenario = new CenarioComColisao("resources/cenario1.scn");
         this.cenario.adicionaObjeto(ryu); //Aqui, o controle de colisão ´é transferido para o cenario
+        
     } catch (FileNotFoundException ex) {
         JOptionPane.showMessageDialog(null, ex.getMessage());
     }

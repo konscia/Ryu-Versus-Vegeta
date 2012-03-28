@@ -1,4 +1,4 @@
-package ryuversusvegeta_2;
+package ryuversusvegeta_exemplo_composicao;
 
 import javaPlayExtras.ObjetoComGravidade;
 import javaPlay.Imagem;
@@ -24,8 +24,10 @@ public class Ryu extends ObjetoComGravidade {
     protected int vida = 100;
     
     public Ryu() {
-        
         try {
+            //COMPOSIÇÃO TIPO 1
+            //A classe Ryu é composta por diversos objetos da classe Imagem
+            //E a inicialização das partes é feita pelo construtor da classe.
             this.imgNormal = new Imagem("resources/ryu/normal.png");
             this.imgTras = new Imagem("resources/ryu/normal.png");
             this.imgFrente = new Imagem("resources/ryu/normal.png");
@@ -40,8 +42,8 @@ public class Ryu extends ObjetoComGravidade {
         this.x = 400;
         
         //Essencial par o objetoComGravidade poder trabalhar
-        this.setAltura( this.imgAtual.pegaAltura() );
-        this.setLargura(this.imgAtual.pegaLargura() );
+        this.altura = this.imgAtual.pegaAltura();
+        this.largura = this.imgAtual.pegaLargura();
     }
 
     public void step(long timeElapsed) {
@@ -70,7 +72,7 @@ public class Ryu extends ObjetoComGravidade {
 
 
     public void alteraImagem(Imagem novaImagem){
-        this.imgAtual = novaImagem;
+        //this.imgAtual = novaImagem;
         this.setAltura( this.imgAtual.pegaAltura() );
         this.setLargura( this.imgAtual.pegaLargura() );
     }
@@ -85,10 +87,10 @@ public class Ryu extends ObjetoComGravidade {
     }
 
     public void pula() {
-        //if(this.estaNoChao){
+        if(this.estaNoChao){
             this.alteraImagem(this.imgPulo);
-            this.impulso( 30 );
-        //}        
+            this.impulso( 35 );
+        }        
 
     }
 
@@ -100,6 +102,14 @@ public class Ryu extends ObjetoComGravidade {
     public void tras() {
         this.alteraImagem(this.imgTras);
         this.x += this.velocidade;
+    }
+
+    public void perdeVida(int pontos){
+        this.vida -= pontos;
+    }
+
+    public boolean estaMorto(){
+        return (this.vida <= 0);
     }
    
 

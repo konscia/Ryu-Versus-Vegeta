@@ -24,6 +24,8 @@ public class Ryu extends ObjetoComGravidade {
     protected int vida = 100;
     
     public Ryu() {
+
+       
         try {
             this.imgNormal = new Imagem("resources/ryu/normal.png");
             this.imgTras = new Imagem("resources/ryu/normal.png");

@@ -42,7 +42,8 @@ public class CenarioComColisao {
     }
 
     public void draw(Graphics g) {
-        this.scene.draw(g);        
+        this.scene.draw(g);     
+        //this.drawDebug(g);
     }
 
     public boolean temColisaoComTile(ObjetoComGravidade obj, int idTile){
@@ -121,7 +122,7 @@ public class CenarioComColisao {
         //Caso especial quando o objeto
         //por causa da força da gravidade
         //atravessa todo o tile.
-        if (obj.getY() < tile.getCentralY() && obj.getMaxY() > tile.max.y && obj.getPontoCentral().x > tile.min.x && obj.getPontoCentral().x < tile.max.x) {
+        if (obj.getY() < tile.getCentralY() && obj.getMaxY() > tile.max.y && obj.getPontoCentral().x > tile.min.x && obj.getPontoCentral().x < tile.max.x && !obj.estaSubindo()) {
             direcao = DirecaoColisao.CIMA_PARA_BAIXO;
         }
 
